@@ -1,0 +1,32 @@
+CREATE TABLE `message` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `Message` varchar(100) NOT NULL,
+  `senderName` varchar(45) NOT NULL,
+  `receiverName` varchar(45) NOT NULL,
+  `sentTime` datetime DEFAULT NULL,
+  `skillId` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `skillId` (`skillId`),
+  KEY `senderName` (`senderName`),
+  KEY `receiverName` (`receiverName`),
+  CONSTRAINT `message_ibfk_1` FOREIGN KEY (`skillId`) REFERENCES `skills` (`skillId`),
+  CONSTRAINT `message_ibfk_2` FOREIGN KEY (`senderName`) REFERENCES `user` (`userName`),
+  CONSTRAINT `message_ibfk_3` FOREIGN KEY (`receiverName`) REFERENCES `user` (`userName`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `skills` (
+  `skillId` varchar(45) NOT NULL,
+  `userName` varchar(45) NOT NULL,
+  `skillDesc` varchar(90) NOT NULL,
+  PRIMARY KEY (`skillId`),
+  KEY `userName_idx` (`userName`),
+  CONSTRAINT `userName` FOREIGN KEY (`userName`) REFERENCES `user` (`userName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `user` (
+  `userName` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `address` varchar(90) DEFAULT NULL,
+  PRIMARY KEY (`userName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
